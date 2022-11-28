@@ -17,10 +17,9 @@ class readController extends BaseController
         $con = \config\Database::connect();
         $query = $con->query("select * from posts order by rand() limit 16");
         $rs['video'] = $query->getResult(); 
-        $querys = $con->query("select * from posts where ID=".$id);
         $title = $con->query("select * from posts where ID=".$id);
         $rs['title'] = $title->getResult();
-        $rs['myVideo'] = $querys->getResult();
+        $rs['myVideo'] = $rs['title'];
         echo view('Player',$rs); 
     }
     public function video($id = null){
