@@ -1,3 +1,4 @@
+
 <div class="bg-black bg-opacity-50 h-full  fixed inset-0 hidden justify-center items-center z-30" id="Login">
         <div class="relative max-h-screen ml-50 bg-white lg:w-4/12 rounded-lg">
             <div class="m-auto py-1 px-1 sm:p-21  w-10/12">
@@ -29,33 +30,41 @@
                 <div role="hidden" class="mt-12 border-t">
                     <span class="block w-max mx-auto -mt-3 px-4 text-center text-gray-500 bg-white">Or</span>
                 </div>
-
+  
                 <form id="login_form" action="<?= base_url() ?>/login" enctype="multipart/form-data" class="space-y-6 py-6" novalidate>
                     <div>
                         <input 
                                 type="text" 
                                 placeholder="Your Email"
                                 name="mail"
+                                id="Email"
                                 class="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"
-                                required
+                              
                         >
+                     
                         <div class="invalid-feedback">email is required</div>
                     </div>
-
+                    <span id="spn1"></span>     
                     <div class="flex flex-col items-end">
                         <input 
                                 type="password"
                                 placeholder="Password"
                                 name="pass"
-                                class="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"
-                                required
+                                id="passw"
+                                class="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"  
+                                
+                                
                         >
+                      
                         <div class="invalid-feedback">password is required</div>
+                         </div>
+                         <span id="spn2"></span>
+                         <div>
                         <button type="reset" class="w-max p-3 -mr-3">
                             <span class="text-sm tracking-wide text-blue-600">Forgot password ?</span>
                         </button>
                     </div>
-
+                   
                     <div>
                     <button id="login_btn" class="w-full px-6 py-3 rounded-xl   bg-gradient-to-r from-[#0088ff] to-[#1fc812] duration-3000">
                       <span class="font-semibold text-white text-lg ">Login</span>
@@ -177,6 +186,7 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
        
        <script>
+    
         function dropDown() {
             document.querySelector('.submenu').classList.toggle('hidden')
           document.querySelector('#arrow').classList.toggle('rotate-0')
@@ -194,10 +204,11 @@
           document.querySelector('.sideMenubar-Main').classList.toggle('hidden')
         }
         function Login(){
+          
             var overlay=document.querySelector('#Login');
             overlay.classList.toggle('hidden');
             overlay.classList.toggle('flex');
-
+            
         }
         function Register()
         {
@@ -310,12 +321,14 @@
                             Login()
                             console.log(response.sms.ID)
                             $("#register_btn").text('Sign Up')
+                            
                             }
                         }
                 });
             }
         });
     })
+    
     
     $(function(){
         $('#login_form').submit(function (e) { 
@@ -325,8 +338,39 @@
                 e.preventDefault()
                 $(this).addClass('was-validated');
             }else{
-                $("#login_btn").text('connecting...')
-                $.ajax({
+              
+                
+
+
+   
+ 
+ 
+  var valid= true;
+  $('#Email').css("border","1px solid black");
+
+  if(($('#Email').val().length==0 )&&($('#passw').val().length==0)){
+    $('#passw').css("border","1px solid red");valid =false;
+    $('#Email').css("border","1px solid red");valid =false;
+    $('#spn1').css('color','red');
+    $('#spn2').css('color','red');
+    $('#spn1').text("mail is required") ;
+    $('#spn2').text("Password is required") ;
+  }
+
+ else if(($('#Email').val().length==0 )){
+$('#spn1').css('color','red');
+ $('#spn1').text("mail is required") ;
+ $('#Email').css("border","1px solid red");valid =false;
+  }
+  
+ else if($('#passw').val().length==0){
+ $('#spn2').css('color','red');
+ $('#spn2').text("Password is required") ;
+ $('#passw').css("border","1px solid red");valid =false;
+  }
+  else{
+    $("#login_btn").text('connecting...')
+    $.ajax({
                     url: '<?= base_url('/login') ?>',
                     method: 'post',
                     data: formData,
@@ -342,6 +386,10 @@
                                     'error'
                             )
                             $("#login_btn").text('Login')
+                            $('#Email').css("border","1px solid black");
+                            $('#passw').css("border","1px solid black");
+                            $('#spn1').text("") ;
+                          $('#spn2').text("") ;
                         }else{
                             var overlay=document.querySelector('#Login');
                             overlay.classList.toggle('hidden');
@@ -353,6 +401,7 @@
                                     response.message,
                                     'success'
                             )
+                            $(location).prop("href", "http://localhost/TeramaFlix/");
                             $('#session').val(response.sms.ID);
                             $('.buttons').hide();
                             $("#login_btn").text('Login')
@@ -360,9 +409,15 @@
                         }
 
                 });
-            }
-        });
-    })
+  }
+
+
+
+ }
+});
+});
+
+   
     $(function(){
         $('#session').change(function (e) { 
             e.preventDefault();

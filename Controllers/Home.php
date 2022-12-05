@@ -23,7 +23,7 @@ class Home extends BaseController
 
 
     public function Login(){
-      
+       
       $mail = $this->request->getPost('mail');
       $pass = $this->request->getPost('pass');
       $user=$this->login->verifyEmail($mail);
@@ -53,7 +53,8 @@ class Home extends BaseController
          }else{
           return $this->response->setJSON([
             'error'=>true,
-            'message'=>"invalid password"
+            'message'=>["invalid password"]
+           
           ]);
          }
           
