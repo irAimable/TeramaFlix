@@ -48,7 +48,6 @@ class UtilisateurModel extends Model
         if(count($result->getResultArray())==1){
             return $result->getRowArray();
             //return true;
-
         }
         else{
             

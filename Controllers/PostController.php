@@ -49,7 +49,7 @@ class PostController extends BaseController
             foreach($posts as $posts){
                 $data .= '<div class="col-md-4">
                         <div class="card shadow-sm">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#detail_post_modal" id="'.$posts['ID'].'" class="post_detail_btn"><video src="Videos/'.$posts['video'].'" poster="Thumbnails/'.$posts['image'].'" width="280" height="300" controls></video></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#detail_post_modal" id="'.$posts['ID'].'" class="post_detail_btn"><img src="Thumbnails/'.$posts['image'].'" width="100%" height="300" /></a>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="card-title fs-5 fw-bold">'.$posts['Title'].'</div>

@@ -26,41 +26,7 @@
                     </ul>
 
                 </div>
-                <div class="populaireblock">
-                    <h1 class="text-xl m-3 text-center font-medium">Populaires</h1>
-                    <div class="populaires   ">
-                        <div class=" ">
-                            <a href="#">
-                                <div class="imag w-100%x]  overflow-hidden">
-                                    <video poster="img/m1.jpg" class="w-[100%]  h-[100%] object-cover" alt="" ></video>
-                                <span>Description</span>
-                            </a>
-                        </div>
-                        <div class=" ">
-                            <a href="#">
-                                <div class="imag w-100%x]  overflow-hidden">
-                                    <video poster="img/m1.jpg" class="w-[100%]  h-[100%] object-cover" alt=""> </video>
-                                </div>
-                                <span>Description</span>
-                            </a>
-                        </div>
-                        <div class="">
-                            <a href="#">
-                                <div class="imag w-100%x]  overflow-hidden">
-                                    <video poster="img/m1.jpg" class="w-[100%]  h-[100%] object-cover" alt=""></video>
-                                </div>
-                                <span>Description</span>
-                            </a>
-                        </div>
-                        <div class=" ">
-                            <a href="#">
-                                <div class="imag w-100%x]  overflow-hidden">
-                                    <video poster="img/m1.jpg" class="w-[100%]  h-[100%] object-cover" alt=""></video>
-                                </div>
-                                <span>Description</span>
-                            </a></div>
-                     </div>
-                </div>
+                
 
              </aside>
              <!-- <div class="sideMenubar  duration-1000

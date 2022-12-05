@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <?php 
-    if(isset($title)){
-      foreach($title as $key =>$title){
-    ?>
-    <title><?= $title->Title ?></title>
-    <?php }} ?>
+    if(isset($myVideo)){
+      foreach($myVideo as $key =>$myVideo){
+          ?>
+    <title><?= $myVideo->Title ?></title>
 </head>
 <body >
     <div class="wrapper">
@@ -91,17 +90,11 @@
                       </button>
                     </div>
                   </div>
-                  <?php 
-                    if(isset($myVideo)){
-                        foreach($myVideo as $key =>$myVideo){
-                        
-                            ?>
-                            <video id="playing" class="rounded" src="<?= base_url() ?>/Videos/<?= $myVideo->video ?>" autoplay></video>
-                            <?php
-                        }
-                    }
-                    ?>
+                  <div id="play">
+                    <video id="playing" class="rounded" src="<?= base_url() ?>/Videos/<?= $myVideo->video ?>" autoplay></video> 
+                  </div>
                 </div>
+                <div id="description">
                 <div class="description  pb-4 px-[3%] lg:px-0 w-full border-b-[2px] ">
                     <div class="p-[2%] pl-0 lg:text-[22px] text-[18px] font-semibold"><?=$myVideo->Title?></div>
                     <div class="reaction flex flex-col justify-between  space-y-2  text-white">
@@ -152,8 +145,9 @@
                         <span>s'abonner</span>
                     </div>
                 </div>
-                
-            </div><?php include "modal.php"; ?>
+                </div>
+            </div>
+            <?php include "modal.php"; ?>
             <aside class="comment  lg:w-[35%] sm:mx-4  lg:ml-4   flex-col space-y-10 relative ">
                 <div class="commentBox hidden  lg:flex flex-col justify-end space-y-4  sm:h-[550px] max-h-[550px] overflow-auto px-3 pt-4  bg-gray-50  lg:rounded-md  shadow-[inset_0px_2px_20px_8px_rgb(0,0,0,0.2)] ">
                     <div class="allUserComment lg:flex flex-col  ">
@@ -227,12 +221,13 @@
                 </div>
                 <div class="moreVideo flex flex-col space-y-2 rounded pt-16 lg:pt-0  overflow-y-hidden   ">
                 
+    <?php }} ?>
                            
                 <?php
                     if(isset($video)){
                         foreach($video as $key =>$video){
                 ?>
-                <div class="thumbid" id="<?=$video->ID?>" dir="<?= base_url() ?>/Videos/<?=$video->video?>">
+                <a href="<?= base_url() ?>/Watch/<?=$video->ID?>" style="text-decolation: none">
                     <div class="lg:h-[115px] sm:h-[450px] w-full  overflow-hidden flex lg:flex-row flex-col lg:justify-center lg:items-start lg:space-x-2">
                       <div class="imagevideo h-[80%] w-full lg:h-[100%] lg:w-[45%]  lg:rounded overflow-hidden">
                           <!-- <img src="img/1.jpg" alt="" class=" lg:rounded h-full w-full"> -->
@@ -246,30 +241,13 @@
                           </div>
                       </div>
                   </div> 
-                  </div>
+                  </a>
                   <?php }} ?>
           </div>
             </aside>
         </div>
         </div>
-   
-      <script src="<?= base_url() ?>/player.js"></script>
-      <script type="text/javascript">
-        $('.thumbid').click(function (e) { 
-          e.preventDefault();
-          var video = $(this).attr('dir');
-          var value = $(this).attr('id');
-          $('#playing').attr('src', video);
-          $.ajax({
-            url: '<?= base_url('read/list')?>',
-            method: 'post',
-            data: {query:value},
-            success: function(data){
-             // $('#sidebar').html(data)
-                
-            }
-          })
-        });
-      </script>
+      <script id="script" src="<?= base_url() ?>/player.js"></script>
+      
    </body>
 </html>

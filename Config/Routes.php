@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+
 $routes->get('/n', 'Home::insert');
 $routes->post('read/search', 'readController::search');
 $routes->post('upload/add', 'UploadController::add');
@@ -45,6 +47,7 @@ $routes->post('read/list', 'readController::list');
 $routes->get('/playVideo/(:num)', 'readController::video/$1');
 $routes->get('/Upload', 'PostController::post');
 $routes->post('/Upload/Video', 'UploadController::upvideo');
+$routes->post('post/add', 'PostController::add');
 $routes->get('post/edit/(:num)', 'PostController::edit/$1');
 $routes->get('post/delete/(:num)', 'PostController::elete/$1');
 $routes->get('post/detail/(:num)', 'PostController::detail/$1');
