@@ -14,7 +14,7 @@
                         ?>
                           <div class="swiper-slide">
                             <div class="videocontainer ">
-                                <div class="  h-[270px]  overflow-hidden">
+                                    <div class="imag  h-[170px] rounded  overflow-hidden">
                                     <a href="<?= base_url() ?>/Watch/<?=$myVideo->ID?>">
                                         <img src="<?= base_url() ?>/Thumbnails/<?=$myVideo->image?>" class="  h-[100%] object-cover">
                                     </a>
@@ -39,7 +39,7 @@
                     foreach($video as $key => $video){
                 ?>  
                 <div class="videocontainer ">
-                    <div class="imag w-[100%] h-[270px]  overflow-hidden">
+                    <div class="imag w-[100%] h-[170px] rounded  overflow-hidden">
                         <a href="<?= base_url() ?>/Watch/<?=$video->ID?>">
                         <img src="<?= base_url()?>/Thumbnails/<?=$video->image?>" class="w-[100%]  h-[100%] object-cover" alt="">
                         </a>

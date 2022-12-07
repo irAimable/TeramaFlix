@@ -37,7 +37,6 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 
-$routes->get('/n', 'Home::insert');
 $routes->post('read/search', 'readController::search');
 $routes->post('upload/add', 'UploadController::add');
 $routes->get('post/fetch', 'PostController::fetch');

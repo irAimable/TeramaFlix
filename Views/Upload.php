@@ -160,32 +160,34 @@
     }else{
         $("#add_post_btn").text('Adding...')
         $.ajax({
-                    url: '<?= base_url('post/add') ?>',
-                    method: 'post',
-                    data: formData,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    dataType: 'json',
-                    success:function(response){
-                        if (response.error) {
-                            $("#image").addClass("is-invalid")
-                            $("#image").next().text(response.message.image)
-                        } else {
-                            $("#add_post_modal").modal('hide')
-                            $("#add_post_form")[0].reset()
-                            $("#image").removeClass("is-invalid")
-                            $("#image").next().text('')
-                            $("#add_post_form").removeClass('was-validated')
-                            Swal.fire(
-                                'Added!',
-                                response.message,
-                                'success'
-                            )
-                            fetchAllposts()
-                        }
-                            $("#add_post_btn").text("Add post")
-                    }
+            url: '<?= base_url('post/add') ?>',
+            method: 'post',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json',
+            success:function(response){
+                if (response.error) {
+                    $("#image").addClass("is-invalid")
+                    $("#image").next().text(response.message.image)
+                } else {
+                    $("#add_post_modal").modal('hide')
+                    $("#add_post_form")[0].reset()
+                    $("#image").removeClass("is-invalid")
+                    $("#image").next().text('')
+                    $("#add_post_form").removeClass('was-validated')
+                    $('#viewVideo').attr('src', '');
+                    $('#img').attr('src', '');
+                    Swal.fire(
+                        'Added!',
+                        response.message,
+                        'success'
+                    )
+                    fetchAllposts()
+                }
+                    $("#add_post_btn").text("Add post") 
+            }
 
                 });
     }

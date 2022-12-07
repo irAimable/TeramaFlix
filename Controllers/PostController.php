@@ -22,7 +22,7 @@ class PostController extends BaseController
         $imge = $this->request->getFile('file');
         $filename = $file->getRandomName();
         $imagename = $imge->getRandomName();
-        $data = [
+         $data = [
             'Title' =>   $this->request->getPost('title'),
             'Categorie' =>  $this->request->getPost('Categorie'),
             'video' => $filename,
@@ -30,14 +30,14 @@ class PostController extends BaseController
             'Body' =>   $this->request->getPost('body'),
             'Created_at' =>  date('Y-m-d H:i:s')
         ];
-            $file->move('Videos', $filename);
-            $imge->move('Thumbnails',$imagename);
-            $postModel = new \App\Models\PostModel();
-            $postModel->save($data);
-            return $this->response->setJSON([
-                'error'=>false,
-                'message'=>"Successfuly added new post"
-            ]);
+        $file->move('Videos', $filename);
+        $imge->move('Thumbnails',$imagename);
+        $postModel = new \App\Models\PostModel();
+        $postModel->save($data);
+        return $this->response->setJSON([
+            'error'=>false,
+            'message'=>$data
+        ]); 
         
     }
     //handle fecth all post ajax request

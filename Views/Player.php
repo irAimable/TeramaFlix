@@ -104,7 +104,7 @@
                             <div class="">vues</div>
                         </div>
                         <div class="dateSortie  text-black lg:text-base text-[13px]">
-                            sortie le <span class="date lg:text-base text-[13px]">6/6/2022</span>
+                            sortie le <span class="date lg:text-base text-[13px]"><?= $myVideo->Created_at ?></span>
                         </div>
                        </div>
                        <div class="reaction flex flex-row justify-between">

@@ -9,7 +9,7 @@ class readController extends BaseController
         $con = \config\Database::connect();
         $querys = $con->query("select * from posts order by rand() limit 5");
         $rs['mVideo'] = $querys->getResult();
-        $query = $con->query("select * from posts order by rand() limit 16");
+        $query = $con->query("select * from posts order by rand()");
         $rs['video'] = $query->getResult(); 
         echo view('index',$rs); 
     }
