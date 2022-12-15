@@ -23,22 +23,24 @@ class PostController extends BaseController
         $filename = $file->getRandomName();
         $imagename = $imge->getRandomName();
          $data = [
-            'Title' =>   $this->request->getPost('title'),
-            'Categorie' =>  $this->request->getPost('Categorie'),
-            'video' => $filename,
-            'image' => $imagename,
-            'Body' =>   $this->request->getPost('body'),
-            'Created_at' =>  date('Y-m-d H:i:s')
+            'ID'=>'vd21',
+            'Title' => $this->request->getPost('title'),
+            'Image' => $imagename,
+            'Video' => $filename,
+            'Categorie' => 'ct2',
+            'Body' => $this->request->getPost('body'),
+            'User'=> 'us2',
+            'Genre'=> 'gr3',
+            'Visible'=> false
         ];
-        $file->move('Videos', $filename);
-        $imge->move('Thumbnails',$imagename);
         $postModel = new \App\Models\PostModel();
-        $postModel->save($data);
+        $postModel->insert($data); 
+        $file->move('Videos', $filename);
+        $imge->move('Thumbnails',$imagename); 
         return $this->response->setJSON([
             'error'=>false,
-            'message'=>$data
+            'message'=>"Insert Success",
         ]); 
-        
     }
     //handle fecth all post ajax request
     public function fetch(){
@@ -49,7 +51,7 @@ class PostController extends BaseController
             foreach($posts as $posts){
                 $data .= '<div class="col-md-4">
                         <div class="card shadow-sm">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#detail_post_modal" id="'.$posts['ID'].'" class="post_detail_btn"><img src="Thumbnails/'.$posts['image'].'" width="100%" height="300" /></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#detail_post_modal" id="'.$posts['ID'].'" class="post_detail_btn"><img src="Thumbnails/'.$posts['Image'].'" width="100%" height="300" /></a>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="card-title fs-5 fw-bold">'.$posts['Title'].'</div>
@@ -162,19 +164,20 @@ class PostController extends BaseController
     public function searched()
     {
         $value = $this->request->getPost('query');
-     $con = \config\Database::connect();
-        $post = $con->query("select * from posts where Title LIKE '%".$value."%'");
+        $con = \config\Database::connect();
+        $post = $con->query("select * from video where Title LIKE '%".$value."%'");
         $video = $post->getResult();
         $data = '';
         foreach($video as $video){
             $data.='
             <div class="flex gap-8 mb-8">
-            <a href="'.base_url().'/Watch/'.$video->ID.'">
-                <img src="Thumbnails/'.$video->image.'" class="rounded-md " height="120" width="240"/>
+            <a href="'.base_url() .'/Watch?v='.$video->ID.'">
+                <img src="Thumbnails/'.$video->Image.'" class="rounded-md " height="120" width="240"/>
             </a>
                 <div class="flex flex-col">
                     <div><h1 class="text-xl">'.$video->Title.' </h1></div>
-                    <div class="description truncate text-sm">'. $video->Categorie.'</div>
+                    <div class="nbrVues ">'.$video->Views .'vues . '.$video->Created_at.'</div> <br>
+                    <div class="description flex truncate text-sm"><img src="'.base_url().'/img/logo.png" class="w-13 h-12 my-1  rounded-full " alt="logo"><p mt-5>'. $video->Nom.' '.$video->Prenom.'</p></div>
                 </div>
             </div>';
         }

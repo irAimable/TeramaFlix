@@ -15,12 +15,12 @@
                           <div class="swiper-slide">
                             <div class="videocontainer ">
                                     <div class="imag  h-[170px] rounded  overflow-hidden">
-                                    <a href="<?= base_url() ?>/Watch/<?=$myVideo->ID?>">
-                                        <img src="<?= base_url() ?>/Thumbnails/<?=$myVideo->image?>" class="  h-[100%] object-cover">
+                                    <a href="<?= base_url() ?>/Watch?v=<?=$myVideo->ID?>">
+                                        <img src="<?= base_url() ?>/Thumbnails/<?=$myVideo->Image?>" class="  h-[100%] object-cover">
                                     </a>
                                 </div>
-                                <h3 class="text-xl  font-medium "><?= substr($myVideo->Title, 0, 20) .'... '?></h3>
-                                <span class="text-[13px]"><?= $myVideo->Categorie?></span>
+                                <h10 class="text-xl  font-medium "><?= substr($myVideo->Title, 0, 20) .'... '?></h10><br>
+                                <span class="text-[13px]"><?= $myVideo->Nom?> <?= $myVideo->Prenom?></span>
                             </div>
                           </div>
                             <?php
@@ -40,12 +40,12 @@
                 ?>  
                 <div class="videocontainer ">
                     <div class="imag w-[100%] h-[170px] rounded  overflow-hidden">
-                        <a href="<?= base_url() ?>/Watch/<?=$video->ID?>">
-                        <img src="<?= base_url()?>/Thumbnails/<?=$video->image?>" class="w-[100%]  h-[100%] object-cover" alt="">
+                        <a href="<?= base_url() ?>/Watch?v=<?=$video->ID?>">
+                        <img src="<?= base_url()?>/Thumbnails/<?=$video->Image?>" class="w-[100%]  h-[100%] object-cover" alt="">
                         </a>
                     </div>
-                    <h3 class="text-xl  font-medium "><?= substr($video->Title, 0, 20) .'... '?></h3>
-                    <span class="text-base"><?= $video->Categorie?></span>
+                    <h10 class="text-xl  font-medium "><?= substr($video->Title, 0, 20) ?></h10><br>
+                    <span class="text-base"><?= $video->Nom?> <?= $video->Prenom?></span>
                 </div>
                 <?php
                 }

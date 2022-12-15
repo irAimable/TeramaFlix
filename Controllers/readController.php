@@ -2,42 +2,57 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\Request;
+use App\Models\ViewsModel;
+use App\Models\LikesModel;
+
 class readController extends BaseController
 {
     public function index()
     {
         $con = \config\Database::connect();
-        $querys = $con->query("select * from posts order by rand() limit 5");
+        $querys = $con->query("select * from video order by rand() limit 5");
         $rs['mVideo'] = $querys->getResult();
-        $query = $con->query("select * from posts order by rand()");
+        $query = $con->query("select * from video order by rand()");
         $rs['video'] = $query->getResult(); 
         echo view('index',$rs); 
     }
-    public function play($id = null){
+    public function play(){
         $con = \config\Database::connect();
-        $query = $con->query("select * from posts order by rand() limit 16");
+        $video = $this->request->getVar('v');
+        $query = $con->query("select * from video order by rand() limit 16");
         $rs['video'] = $query->getResult(); 
-        $title = $con->query("select * from posts where ID=".$id);
+        $title = $con->query("select * from video where ID='".$video."'");
+        $comments = $con->query("select * from commentaire WHERE Post='".$video."'");
+        $rs['comments'] = $comments->getResult();
         $rs['title'] = $title->getResult();
         $rs['myVideo'] = $rs['title'];
         echo view('Player',$rs); 
     }
-    public function video($id = null){
-        $con = \config\Database::connect();
-        $query = $con->query("select * from posts order by rand() limit 16");
-        $rs['video'] = $query->getResult(); 
-        $querys = $con->query("select * from posts where ID=".$id);
-        $rs['myVideo'] = $querys->getResult();
-        echo view('Player',$rs); 
-    }
-    
-    public function vide($id = null)
+    public function liked()
     {
-        $con = \config\Database::connect();
-        $query = $con->query("select * from posts order by rand() limit 16");
-        $rs['video'] = $query->getResult(); 
-        $querys = $con->query("select * from posts where ID=".$id);
-        $rs['myVideo'] = $querys->getResult();
-        echo view('playVideo',$rs); 
+        $user = $this->request->getPost('user');
+        $video = $this->request->getPost('video');
+        $data = [
+            'ID'=>'lk1',
+            'Posts'=>$video,
+            'User'=>$user,
+            'Type'=>'p'
+        ];
+        $LikesModel = new LikesModel();
+        $LikesModel->insert($data);
+    }
+    public function comment()
+    {
+        $user = $this->request->getPost('user');
+        $video = $this->request->getPost('video');
+        $data = [
+            'ID'=>'lk1',
+            'Posts'=>$video,
+            'User'=>$user,
+            'Type'=>'p'
+        ];
+        $LikesModel = new LikesModel();
+        $LikesModel->insert($data);
     }
 } 

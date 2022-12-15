@@ -460,8 +460,7 @@
             }
         });
     })
-    
-    
+    //user login handle request
     $(function(){
         $('#login_form').submit(function (e) { 
             e.preventDefault();

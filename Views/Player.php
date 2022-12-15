@@ -11,6 +11,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+      #aime{
+        background-color: rgb(7, 89, 241);
+      }
+    </style>
     <?php 
     if(isset($myVideo)){
       foreach($myVideo as $key =>$myVideo){
@@ -91,7 +96,7 @@
                     </div>
                   </div>
                   <div id="play">
-                    <video id="playing" class="rounded" src="<?= base_url() ?>/Videos/<?= $myVideo->video ?>" autoplay></video> 
+                    <video  class="rounded" src="<?= base_url() ?>/Videos/<?= $myVideo->Video ?>" autoplay></video> 
                   </div>
                 </div>
                 <div id="description">
@@ -100,7 +105,11 @@
                     <div class="reaction flex flex-col justify-between  space-y-2  text-white">
                        <div class="vuesAndDate flex flex-row space-x-2">
                         <div class="vues  text-black space-x-1 lg:text-base text-[13px] flex flex-row justify-center">
-                            <div class="nbrVues ">600</div>
+                        </div>
+                       </div>
+                       <div class="vuesAndDate flex flex-row space-x-2">
+                        <div class="vues  text-black space-x-1 lg:text-base text-[13px] flex flex-row justify-center">
+                            <div class="nbrVues "><?= $myVideo->Views ?></div>
                             <div class="">vues</div>
                         </div>
                         <div class="dateSortie  text-black lg:text-base text-[13px]">
@@ -112,7 +121,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="lg:w-6 lg:h-6 w-4 h-4 cursor-pointer">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
                               </svg>
-                              <span class="">j'aime</span>
+                              <span id="<?= $myVideo->ID ?>" class="liked">j'aime</span>
                             </div>
                            <div class="jaimepas bg-gray-200 p-2 rounded-3xl h-[45px] text-black flex lg:flex-row justify-center items-center  lg:space-x-2 lg:text-[18px] lg:text-base text-[13px] font-semibold flex-col">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="lg:w-6 lg:h-6 w-4 h-4 cursor-pointer">
@@ -139,7 +148,7 @@
                 <div class="profil  flex flex-row justify-between lg:px-0 px-[3%] items-center ">
                     <div class="profilChannel  flex justify-start items-center space-x-2  cursor-pointer ">
                         <img src="<?= base_url() ?>/img/logo.png" class="w-13 h-12 my-1  rounded-full " alt="logo">
-                        <h1 class= "font-bold text-[20px] cursor-pointer">Brave Channel</h1>
+                        <h1 class= "font-bold text-[20px] cursor-pointer"><?= $myVideo->Nom ?> <?= $myVideo->Prenom ?></h1>
                     </div>
                     <div class="sabonner bg-blue-500 h-[45px] px-[10px] flex justify-center items-center rounded cursor-pointer text-white">
                         <span>s'abonner</span>
@@ -151,47 +160,24 @@
             <aside class="comment  lg:w-[35%] sm:mx-4  lg:ml-4   flex-col space-y-10 relative ">
                 <div class="commentBox hidden  lg:flex flex-col justify-end space-y-4  sm:h-[550px] max-h-[550px] overflow-auto px-3 pt-4  bg-gray-50  lg:rounded-md  shadow-[inset_0px_2px_20px_8px_rgb(0,0,0,0.2)] ">
                     <div class="allUserComment lg:flex flex-col  ">
+                      <?php
+                      if(isset($comments)){
+                        foreach($comments as $key =>$comments){
+                            ?>
                         <div class="userComment flex flex-row space-x-1  mb-5">
                             <div class="userProfil  cursor-pointer w-[10%] ">
                                 <img src="<?= base_url() ?>/img/logo.png" class="w-10 h-9  rounded-full " alt="logo">
                             </div>
                             <div class="userTextComment bg-blue-500 max-w-[90%] rounded-lg px-[20px] py-[6px]">
-                                <h5 class="userName font-semibold">Brave</h5>
-                                <p class="leading-[1rem]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ipsa.</p>
+                                <h5 class="userName font-semibold"><?= $comments->Nom ?></h5>
+                                <p class="leading-[1rem]"><?= $comments->Body?></p>
                             </div>
                         </div>
-                        <div class="userComment flex flex-row space-x-1  mb-5">
-                            <div class="userProfil  cursor-pointer w-[10%] ">
-                                <img src="<?= base_url() ?>/img/logo.png" class="w-10 h-9  rounded-full " alt="logo">
-                            </div>
-                            <div class="userTextComment bg-blue-500 max-w-[90%] rounded-lg px-[20px] py-[6px]">
-                                <h5 class="userName font-semibold">Brave</h5>
-                                <p class="leading-[1rem]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi, ipsa.</p>
-                            </div>
-                        </div>
-                        <div class="userComment flex flex-row space-x-1  mb-5">
-                            <div class="userProfil  cursor-pointer w-[10%] ">
-                                <img src="<?= base_url() ?>/img/logo.png" class="w-10 h-9  rounded-full " alt="logo">
-                            </div>
-                            <div class="userTextComment bg-blue-500 max-w-[90%] rounded-lg px-[20px] py-[6px]">
-                                <h5 class="userName font-semibold">Brave</h5>
-                                <p class="leading-[1rem]">Lorem, ipsum  adipisicing elit. Eligendi, ipsa.</p>
-                            </div>
-                        </div>
-                        <div class="userComment flex flex-row space-x-1  mb-5">
-                            <div class="userProfil  cursor-pointer w-[10%] ">
-                                <img src="<?= base_url() ?>/img/logo.png" class="w-10 h-9  rounded-full " alt="logo">
-                            </div>
-                            <div class="userTextComment bg-blue-500 max-w-[90%] rounded-lg px-[20px] py-[6px]">
-                                <h5 class="userName font-semibold">Brave</h5>
-                                <p class="leading-[1rem]">Lorem, ir  Eligendi, ipsa.</p>
-                            </div>
-                        </div>
-                        
+                        <?php }}?>
                     </div>
                 <div class="inputBox flex justify-center">
                     <div class="inputComment flex flex-row w-[80%]  h-10 border mb-3 rounded-full bg-gray-300">
-                        <input type="text"  id="" placeholder="Entrer votre commentaire" class="Commentinput w-[83%] pl-2 rounded-l-full bg-gray-300">
+                        <input type="text"  id="comment" placeholder="Entrer votre commentaire" class="Commentinput w-[83%] pl-2 rounded-l-full bg-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 m-[1%] text-slate-800 cursor-pointer">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
                           </svg>
@@ -227,17 +213,17 @@
                     if(isset($video)){
                         foreach($video as $key =>$video){
                 ?>
-                <a href="<?= base_url() ?>/Watch/<?=$video->ID?>" style="text-decolation: none">
+                <a href="<?= base_url() ?>/Watch?v=<?=$video->ID?>" style="text-decolation: none">
                     <div class="lg:h-[115px] sm:h-[450px] w-full  overflow-hidden flex lg:flex-row flex-col lg:justify-center lg:items-start lg:space-x-2">
                       <div class="imagevideo h-[80%] w-full lg:h-[100%] lg:w-[45%]  lg:rounded overflow-hidden">
                           <!-- <img src="img/1.jpg" alt="" class=" lg:rounded h-full w-full"> -->
-                          <img  src="<?= base_url() ?>/Thumbnails/<?= $video->image ?>" >
+                          <img  src="<?= base_url() ?>/Thumbnails/<?= $video->Image ?>" >
                       </div>
                       <div class="descriptionV flex flex-col  space-y-1 pl-2 lg:p-3 lg:h-[100%] h-[20%] w-full bg-gray-100 lg:w-[60%] lg:rounded">
-                          <div class="videoName font-semibold lg:text-[20px] text-[18px]"><?= substr($video->Title,0,16)."..."  ?></div>
+                          <div class="videoName font-semibold lg:text-[20px] text-[18px]"><?= substr($video->Title,0,16) ?></div>
                           <div class="profilChannel  flex justify-start items-center space-x-2  cursor-pointer ">
                               <img src="<?= base_url() ?>/img/logo.png" class="lg:w-6 w-8 lg:h-6 h-8 my-1   rounded-full " alt="logo">
-                              <h1 class= "font-semibold text-[15px] cursor-pointer"><?= $video->Categorie ?></h1>
+                              <h1 class= "font-semibold text-[15px] cursor-pointer"><?= $video->Nom ?> <?= $video->Prenom ?></h1>
                           </div>
                       </div>
                   </div> 
@@ -248,6 +234,26 @@
         </div>
         </div>
       <script id="script" src="<?= base_url() ?>/player.js"></script>
-      
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('.jaime').click(function (e) { 
+            e.preventDefault();
+            var video = $('.liked').attr('id');
+            $.ajax({
+              method: "post",
+              url: '<?= base_url('post/liked') ?>',
+              data: {user:'us1', video: video},
+              success: function (response) {
+                $('.jaime').attr('id', 'aime');
+              }
+            });
+          });
+          $(document).on('click','.sendButton',(e)=>{
+            e.preventDefault();
+            var cmnt = $('#comment').val();
+            alert(cmnt);
+          })
+          });
+    </script>
    </body>
 </html>

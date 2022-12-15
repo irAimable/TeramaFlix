@@ -14,12 +14,13 @@ class UtilisateurModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['Nom','Prenom','Email','Password','Phone','Naissance','Sexe'];
+    protected $allowedFields = ['ID','Nom','Prenom','Photo','Cover','Naissance','Genre','Mail','Phone','Pays','Password'];
 
-    protected $useTimestamps = true;
-    protected $createdField  = 'Created_at';
-    protected $updatedField  = 'Updated_at';
-    protected $deletedField  = 'DateSuppression';
+    protected $useTimestamps = false;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = '';
+    protected $updatedField  = '';
+    protected $deletedField  = '';
 
     protected $validationRules    = [];
     protected $validationMessages = [];
@@ -43,7 +44,7 @@ class UtilisateurModel extends Model
     public function verifyEmail($mail){
         $builder= $this->db->table('users');
         $builder->select('Password');
-        $builder->where('Email',$mail);
+        $builder->where('Mail',$mail);
         $result= $builder->get();
         if(count($result->getResultArray())==1){
             return $result->getRowArray();
@@ -57,7 +58,7 @@ class UtilisateurModel extends Model
     public function getIdm($mail){
         $builder= $this->db->table('users');
         $builder->select('ID');
-        $builder->where('Email',$mail);
+        $builder->where('Mail',$mail);
         $result= $builder->get();
         if(count($result->getResultArray())==1){
             return $result->getRowArray();

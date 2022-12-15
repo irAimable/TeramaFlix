@@ -4,18 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PostModel extends Model
+class ViewsModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'posts';
+    protected $table            = 'views';
     protected $primaryKey       = 'ID';
     protected $useAutoIncrement = false;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['ID','Title','Image','Video','Categorie','Body','User','Genre','Visible'];
-    
+    protected $allowedFields    = ['ID','Post','User','type'];
     
     // Dates
     protected $useTimestamps = false;
