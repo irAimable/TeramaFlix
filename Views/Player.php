@@ -25,7 +25,7 @@
 <body >
     <div class="wrapper">
         <div class="containervideo mt-[70px]  lg:pt-[3%] lg:px-[3%] flex lg:flex-row flex-col lg:space-y-0 space-y-5">
-          <?php include "header.php"; ?>
+          <?php include "header2.php"; ?>
         <div id="played" class="video    lg:w-[65%] w-full    "> 
                 <div class="video-container paused w-full lg:w-[90%] rounded" data-volume-level="high">
                   <img class="thumbnail-img">

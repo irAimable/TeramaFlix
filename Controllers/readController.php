@@ -5,6 +5,8 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\Request;
 use App\Models\ViewsModel;
 use App\Models\LikesModel;
+use App\Models\UtilisateurModel;
+use PHPUnit\Util\Json;
 
 class readController extends BaseController
 {
@@ -15,9 +17,10 @@ class readController extends BaseController
         $rs['mVideo'] = $querys->getResult();
         $query = $con->query("select * from video order by rand()");
         $rs['video'] = $query->getResult(); 
-        echo view('index',$rs); 
+        echo view('index',$rs);
     }
     public function play(){
+        $user=new UtilisateurModel();
         $con = \config\Database::connect();
         $video = $this->request->getVar('v');
         $query = $con->query("select * from video order by rand() limit 16");
@@ -27,6 +30,8 @@ class readController extends BaseController
         $rs['comments'] = $comments->getResult();
         $rs['title'] = $title->getResult();
         $rs['myVideo'] = $rs['title'];
+        $user_id=session()->get('loggedUser');
+        $rs['user']=$user->getUserInfo($user_id);
         echo view('Player',$rs); 
     }
     public function liked()

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use CodeIgniter\CodeIgniter;
 
 use CodeIgniter\Model;
 
@@ -82,6 +83,18 @@ class UtilisateurModel extends Model
         }
         else{
             
+           return false;
+        }
+    }
+    public function getUserInfo($id){
+        $builder= $this->db->table('users');
+        $builder->select('*');
+        $builder->where('ID',$id);
+        $result= $builder->get();
+        if(count($result->getResultArray())==1){
+            return $result->getRowArray();
+        }
+        else{
            return false;
         }
     }

@@ -383,8 +383,10 @@
                                     response.message,
                                     'success'
                             )
-                            Login()
-                            console.log(response.sms.ID)
+                           // Login()
+                            //console.log(response.sms.ID);
+                            //console.log(response.sms);
+                            $(location).prop("href","<?= base_url('dashb')?>");
                             $("#register_btn").text('Sign Up')
                             
                             }
@@ -525,7 +527,10 @@ $('#spn1').css('color','red');
                                     response.message,
                                     'success'
                             )
-                            $(location).prop("href", "http://localhost/TeramaFlix/");
+                           
+                            //console.log(response.sms.ID);
+                            console.log(response.sms);
+                            $(location).prop("href","<?= base_url('dashb')?>");
                             $('#session').val(response.sms.ID);
                             $('.buttons').hide();
                             $("#login_btn").text('Login')

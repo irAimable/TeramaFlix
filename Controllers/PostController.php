@@ -4,10 +4,13 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\PostModel;
+use App\Models\UtilisateurModel;
+use App\Libraries\hash;
 use CodeIgniter\HTTP\Request;
 
 class PostController extends BaseController
 {
+    
     public function index()
     {
         return view("index");
@@ -16,6 +19,7 @@ class PostController extends BaseController
     {
         return view("Upload");
     }
+    
     //handle new post add jax request
     public function add(){
         $file = $this->request->getFile('myfile');
@@ -84,6 +88,7 @@ class PostController extends BaseController
         }
         
     }
+    
     //handle edit post ajax request
     public function edit($id=null){
         $postModel = new \App\Models\PostModel();
